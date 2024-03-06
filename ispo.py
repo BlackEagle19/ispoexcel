@@ -59,6 +59,7 @@ for link in linkler:
         "FİRMA MAİL":firma_email,
         "FİRMA URL":firma_url
     }
+    print(bilgi)
     firma_bilgileri.append(bilgi)
 
 df=pd.DataFrame(firma_bilgileri)
