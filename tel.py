@@ -1,22 +1,26 @@
+from telegram import Bot
+from telegram import InputFile
+import telegram.ext
+import logging
 
-from aiogram import Bot
-from aiogram.types import InputFile
-import asyncio
+def send_excel_file(excel_file_path, bot_token, chat_id):
+    # Bot'u başlat
+    bot = Bot(token=bot_token)
 
-async def send_excel_file(excel_file_path):
-    bot = Bot(token='6994284905:AAHhU7PleaVU3eSlMFt_qt3imu_KWHmya0c')
+    # Loglama yapısını ayarla (isteğe bağlı)
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        level=logging.INFO)
 
-     # Wrap the file object with InputFile
+    # Excel dosyasını gönder
     with open(excel_file_path, 'rb') as file:
-        excel_file = InputFile(file)
+        bot.send_document(chat_id=chat_id, document=file)
 
-    await bot.send_document(chat_id='-4157001586', document=excel_file)
+# Bot token'ınızı ve hedef chat ID'nizi girin
+BOT_TOKEN = '6994284905:AAHhU7PleaVU3eSlMFt_qt3imu_KWHmya0c'
+CHAT_ID = '-4157001586'  # Kanal için "@channelusername" şeklinde de kullanılabilir
 
-    await bot.close()
-
-    
-# The path to the Excel file you've created
+# Göndermek istediğiniz Excel dosyasının yolu
 EXCEL_FILE_PATH = 'IspoBilgileri.xlsx'
 
-# Call the function to send the Excel file
-asyncio.run(send_excel_file(EXCEL_FILE_PATH))
+# Fonksiyonu çağır
+send_excel_file(EXCEL_FILE_PATH, BOT_TOKEN, CHAT_ID)
