@@ -1,12 +1,15 @@
 
 from aiogram import Bot
+from aiogram.types import InputFile
 import asyncio
 
 async def send_excel_file(excel_file_path):
     bot = Bot(token='6994284905:AAHhU7PleaVU3eSlMFt_qt3imu_KWHmya0c')
 
-    with open(excel_file_path, 'rb') as file:
-        await bot.send_document(chat_id='-4157001586', document=file)
+     # Wrap the file object with InputFile
+    excel_file = InputFile(excel_file_path)
+
+    await bot.send_document(chat_id='-4157001586', document=excel_file)
 
     await bot.close()
 
