@@ -7,7 +7,8 @@ async def send_excel_file(excel_file_path):
     bot = Bot(token='6994284905:AAHhU7PleaVU3eSlMFt_qt3imu_KWHmya0c')
 
      # Wrap the file object with InputFile
-    excel_file = InputFile(excel_file_path)
+    with open(excel_file_path, 'rb') as file:
+        excel_file = InputFile(file)
 
     await bot.send_document(chat_id='-4157001586', document=excel_file)
 
